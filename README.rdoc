@@ -1,28 +1,21 @@
-== README
+== UnTube
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Dead simple video service
 
-Things you may want to cover:
+Ruby version:: <tt>~> 2.2</tt>
 
-* Ruby version
+System dependencies:: PostgreSQL, RSpec
 
-* System dependencies
+* TBD Configuration
 
-* Configuration
+Database creation:: <tt>bundle exec db:setup</tt>
 
-* Database creation
+Database initialization:: <tt>bundle exec db:migrate</tt>
 
-* Database initialization
+How to run the test suite:: <tt>bundle exec rake spec</tt>
 
-* How to run the test suite
+* TBD Services (job queues, cache servers, search engines, etc.)
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+* TBD Deployment instructions
 
 * ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.

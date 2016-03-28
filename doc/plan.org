@@ -16,21 +16,24 @@ The goal of this project is to create a web application with the following goals
 - You can use any language but we do prefer it being in ruby or javascript. If it is not in these languages, please note, we will need instructions to get it running starting from what dependencies are needed :)
 - Any notes or thoughts while building it are appreciated. 
 
-* Untube [0/3]
+* Untube [4/6]
 
-** TODO =rails new=
-- 
-- =-d postgresql=
-- =-T= use RSpec
-
-** TODO setup RSpec
-
-** Video
-
-- url
-
-** Validations
+** TODO Validations
 
 - wrong type
 - too big
+
+** TODO Video
+
+- url
+
+use scaffolding?
+=rails g scaffold video url:text=
+
+** DONE setup db
+** DONE setup RSpec
+** DONE setup plan document
+** DONE =rails new=
+- =-d postgresql=
+- =-T= use RSpec
 
