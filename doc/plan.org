@@ -8,16 +8,28 @@ The goal of this project is to create a web application with the following goals
 - After the video has been uploaded, the user should be able to replay this video from the web application
 - Unit and integration tests should be created
 
-
 ** Notes:
+
 - Please create a public github repo for this project
 - Please make as many commits as it makes sense to other developers
 - Create a README so someone else can build this web application on another computer from cloning the repo to test it out
 - You can use any language but we do prefer it being in ruby or javascript. If it is not in these languages, please note, we will need instructions to get it running starting from what dependencies are needed :)
 - Any notes or thoughts while building it are appreciated. 
 
-* Untube [4/6]
+* Untube [4/10]
 
+** TODO deploy
+** TODO configure
+- 
+** TODO i18n
+- add top level =:locale= route
+
+#+BEGIN_SRC ruby
+  # config/routes.rb
+  scope "/:locale" do
+    resources :books
+  end
+#+END_SRC
 ** TODO Validations
 
 - wrong type
@@ -25,10 +37,11 @@ The goal of this project is to create a web application with the following goals
 
 ** TODO Video
 
-- url
-
 use scaffolding?
-=rails g scaffold video url:text=
+=rails g scaffold video data:bytea filename:text title:text description:text=
+
+- migrate to change filename to ~basename~
+- 
 
 ** DONE setup db
 ** DONE setup RSpec

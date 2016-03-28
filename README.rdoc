@@ -1,12 +1,18 @@
 == UnTube
 
-Dead simple video service
+Dead simple video service.
 
-Ruby version:: <tt>~> 2.2</tt>
+=== Service
 
-System dependencies:: PostgreSQL, RSpec
+Ruby: <tt>~> 2.2</tt>
+Rails: <tt>~> 4.2</tt>
+Rspec: <tt>~> 3.4</tt>
 
-* TBD Configuration
+=== System::
+
+PostgreSQL:: <tt>~> 9.5<tt>
+
+=== Setup
 
 Database creation:: <tt>bundle exec db:setup</tt>
 
@@ -14,8 +20,7 @@ Database initialization:: <tt>bundle exec db:migrate</tt>
 
 How to run the test suite:: <tt>bundle exec rake spec</tt>
 
-* TBD Services (job queues, cache servers, search engines, etc.)
+=== Deployment
 
-* TBD Deployment instructions
+TBD
 
-* ...
