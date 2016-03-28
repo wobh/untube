@@ -28,12 +28,9 @@ The goal of this project is to create a web application with the following goals
 ** Video
 
 - url
-- metadata
-- uploader
-- from_ip
-- status
 
-** Uploader
+** Validations
 
-- name
-- 
+- wrong type
+- too big
+
