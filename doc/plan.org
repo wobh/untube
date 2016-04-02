@@ -16,7 +16,7 @@ The goal of this project is to create a web application with the following goals
 - You can use any language but we do prefer it being in ruby or javascript. If it is not in these languages, please note, we will need instructions to get it running starting from what dependencies are needed :)
 - Any notes or thoughts while building it are appreciated. 
 
-* Untube [6/13]
+* Untube [7/13]
 
 ** TODO deploy
 ** TODO i18n
@@ -28,6 +28,8 @@ The goal of this project is to create a web application with the following goals
     resources :books
   end
 #+END_SRC
+*** references
+- http://guides.rubyonrails.org/i18n.html
 ** TODO configure
 - 
 ** TODO Main page
@@ -35,23 +37,12 @@ The goal of this project is to create a web application with the following goals
 - filename -> base_name
 - =rails g migration=
 
-** TODO Validations
+** DONE Validations on mime_type
+- presence
+- wrong-type
 - too big (? maybe)
-
-*** wrong type
-
-#+BEGIN_SRC ruby
-  class MimeTypeValidator < ActiveModel::Validator
-    def validate(record, mime_type_str)
-      mime_type = Mime::Type.lookup mime_type_str
-      unless mime_type == record.mime_type
-        record.errors[:mime_type] = t.mime_type_invalid 
-      end
-    end
-  end
-#+END_SRC
 *** References
-- 
+- http://guides.rubyonrails.org/active_record_validations.html
 ** TODO Fix specs
 
 #+BEGIN_EXAMPLE
