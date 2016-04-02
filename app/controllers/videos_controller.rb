@@ -16,7 +16,7 @@ class VideosController < ApplicationController
       format.json { render :show, status: :created, location: @video }
       format.mp4  { send_data @video.data,
                     filename: @video.filename + @video.extension,
-                    type: 'video/mp4',
+                    type: @video.mime,
                     disposition: 'inline' }
     end
   end

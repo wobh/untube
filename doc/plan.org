@@ -16,11 +16,9 @@ The goal of this project is to create a web application with the following goals
 - You can use any language but we do prefer it being in ruby or javascript. If it is not in these languages, please note, we will need instructions to get it running starting from what dependencies are needed :)
 - Any notes or thoughts while building it are appreciated. 
 
-* Untube [4/10]
+* Untube [6/13]
 
 ** TODO deploy
-** TODO configure
-- 
 ** TODO i18n
 - add top level =:locale= route
 
@@ -30,19 +28,113 @@ The goal of this project is to create a web application with the following goals
     resources :books
   end
 #+END_SRC
+** TODO configure
+- 
+** TODO Main page
+** TODO change model attributes
+- filename -> base_name
+- =rails g migration=
+
 ** TODO Validations
+- too big (? maybe)
 
-- wrong type
-- too big
+*** wrong type
 
-** TODO Video
+#+BEGIN_SRC ruby
+  class MimeTypeValidator < ActiveModel::Validator
+    def validate(record, mime_type_str)
+      mime_type = Mime::Type.lookup mime_type_str
+      unless mime_type == record.mime_type
+        record.errors[:mime_type] = t.mime_type_invalid 
+      end
+    end
+  end
+#+END_SRC
+*** References
+- 
+** TODO Fix specs
+
+#+BEGIN_EXAMPLE
+Failures:
+
+  1) videos/edit renders the edit video form
+     Failure/Error:
+           assert_select "form[action=?][method=?]", video_path(@video), "post" do
+
+             assert_select "filefield#video_data[name=?]", "video[id]"
+
+             assert_select "textfield#video_title[name=?]", "video[title]"
+
+             assert_select "textarea#video_description[name=?]", "video[description]"
+           end
+
+     Minitest::Assertion:
+       Expected at least 1 element matching "form[action="/videos/#<Video:0x007ff65fe654d0>"][method="post"]", found 0..
+       Expected 0 to be >= 1.
+     # ./.direnv/ruby/gems/minitest-5.8.4/lib/minitest/assertions.rb:129:in `assert'
+     # ./.direnv/ruby/gems/minitest-5.8.4/lib/minitest/assertions.rb:246:in `assert_operator'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:280:in `assert_size_match!'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:175:in `block in assert_select'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:174:in `tap'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:174:in `assert_select'
+     # ./spec/views/videos/edit.html.erb_spec.rb:18:in `block (2 levels) in <top (required)>'
+
+  2) videos/new renders new video form
+     Failure/Error: assert_select "filefield#video_data[name=?]", "video[id]"
+
+     Minitest::Assertion:
+       Expected at least 1 element matching "filefield#video_data[name="video[id]"]", found 0..
+       Expected 0 to be >= 1.
+     # ./.direnv/ruby/gems/minitest-5.8.4/lib/minitest/assertions.rb:129:in `assert'
+     # ./.direnv/ruby/gems/minitest-5.8.4/lib/minitest/assertions.rb:246:in `assert_operator'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:280:in `assert_size_match!'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:175:in `block in assert_select'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:174:in `tap'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:174:in `assert_select'
+     # ./spec/views/videos/new.html.erb_spec.rb:20:in `block (3 levels) in <top (required)>'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:295:in `nest_selection'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:177:in `block in assert_select'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:174:in `tap'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:174:in `assert_select'
+     # ./spec/views/videos/new.html.erb_spec.rb:18:in `block (2 levels) in <top (required)>'
+
+  3) videos/index renders a list of videos
+     Failure/Error: assert_select "tr>td", :text => "MyText".to_s, :count => 2
+
+     Minitest::Assertion:
+       Expected exactly 2 elements matching "tr>td", found 8..
+       Expected: 2
+         Actual: 8
+     # ./.direnv/ruby/gems/minitest-5.8.4/lib/minitest/assertions.rb:129:in `assert'
+     # ./.direnv/ruby/gems/minitest-5.8.4/lib/minitest/assertions.rb:163:in `assert_equal'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:278:in `assert_size_match!'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:175:in `block in assert_select'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:174:in `tap'
+     # ./.direnv/ruby/gems/rails-dom-testing-1.0.7/lib/rails/dom/testing/assertions/selector_assertions.rb:174:in `assert_select'
+     # ./spec/views/videos/index.html.erb_spec.rb:27:in `block (2 levels) in <top (required)>'
+#+END_EXAMPLE
+** DONE Fix mp4 mime-type
+
+- lookup mime-type
+  - supported types
+  - 
+** DONE Video
 
 use scaffolding?
 =rails g scaffold video data:bytea filename:text title:text description:text=
 
 - migrate to change filename to ~basename~
 - 
+*** references
+- http://edgeguides.rubyonrails.org/active_record_postgresql.html
+- http://api.rubyonrails.org/classes/ActionController/DataStreaming.html
+- http://easyhtml5video.com
+- http://tools.ietf.org/html/rfc4337
 
+- Safari playback problem
+  - http://stackoverflow.com/a/15279480/2059944
+  - https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/StreamingMediaGuide/FrequentlyAskedQuestions/FrequentlyAskedQuestions.html#//apple_ref/doc/uid/TP40008332-CH103-SW1
+  - https://trac.ffmpeg.org/wiki/Encode/H.264#AdditionalInformationTips
 ** DONE setup db
 ** DONE setup RSpec
 ** DONE setup plan document
