@@ -30,13 +30,14 @@ The goal of this project is to create a web application with the following goals
 #+END_SRC
 *** references
 - http://guides.rubyonrails.org/i18n.html
-** TODO configure
-- 
+** TODO setup database_cleaner
+
 ** TODO Main page
 ** TODO change model attributes
 - filename -> base_name
 - =rails g migration=
-
+** TODO setup factory girl 
+- replace =Video.create= with =Factory.create :video=
 ** DONE Validations on mime_type
 - presence
 - wrong-type
