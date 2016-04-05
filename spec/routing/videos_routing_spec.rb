@@ -4,6 +4,7 @@ RSpec.describe VideosController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
+      expect(:get => "/").to route_to("videos#index")
       expect(:get => "/videos").to route_to("videos#index")
     end
 

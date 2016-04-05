@@ -16,9 +16,10 @@ The goal of this project is to create a web application with the following goals
 - You can use any language but we do prefer it being in ruby or javascript. If it is not in these languages, please note, we will need instructions to get it running starting from what dependencies are needed :)
 - Any notes or thoughts while building it are appreciated. 
 
-* Untube [8/14]
+* Untube [11/14]
 
 ** TODO deploy
+** TODO setup database_cleaner
 ** TODO i18n
 - add top level =:locale= route
 
@@ -30,10 +31,11 @@ The goal of this project is to create a web application with the following goals
 #+END_SRC
 *** references
 - http://guides.rubyonrails.org/i18n.html
-** TODO setup database_cleaner
+** DONE Main page
+- change to videos#index
+- setup top-level headline
 
-** TODO Main page
-** TODO change model attributes
+** DONE change model attributes
 - filename -> base_name
 - =rails g migration=
 ** DONE setup factory girl
