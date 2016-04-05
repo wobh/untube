@@ -14,3 +14,6 @@
 
 # Ignore rspec state
 spec/examples.txt
+
+# Ignore byebug history
+.byebug_history
