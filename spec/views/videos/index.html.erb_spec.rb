@@ -6,8 +6,8 @@ RSpec.describe "videos/index", type: :view do
 
   it "renders a list of videos" do
     render
-    assert_select "tr>td", :text => "foo".to_s, :count => 2
-    assert_select "tr>td", :text => "".to_s, :count => 2
-    assert_select "tr>td", :text => "foo".to_s, :count => 2
+    assert_select "tr>td", :text => "foo.mp4".to_s, :count => 2
+    assert_select "tr>td", :text => "video/mp4".to_s, :count => 2
+    assert_select "tr>td", :text => "Foo".to_s, :count => 2
   end
 end
