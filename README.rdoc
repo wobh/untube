@@ -2,15 +2,18 @@
 
 Dead simple video service.
 
+Demonstration. Don't actually use this. Super beta.
+
 === Service
 
-Ruby: <tt>~> 2.2</tt>
-Rails: <tt>~> 4.2</tt>
-Rspec: <tt>~> 3.4</tt>
+- Ruby: <tt>~> 2.2</tt>
+- Rails: <tt>~> 4.2</tt>
+- Rspec: <tt>~> 3.4</tt>
+- Bundler: <tt>~> 1.11</tt>
 
-=== System::
+=== System
 
-PostgreSQL:: <tt>~> 9.5<tt>
+- PostgreSQL: <tt>~> 9.5</tt>
 
 === Setup
 
@@ -20,7 +23,15 @@ Database initialization:: <tt>bundle exec db:migrate</tt>
 
 How to run the test suite:: <tt>bundle exec rake spec</tt>
 
+=== Installation
+
+Very approximately:
+
+1. <tt>install, setup Postgres, Ruby, Rails</tt>
+2. <tt>git clone https://github.com/wobh/untube.git</tt>
+3. <tt>bundle exec rake db:setup</tt>
+4. <tt>bundle exec rails s</tt>
+
 === Deployment
 
 TBD
-

@@ -16,21 +16,43 @@ The goal of this project is to create a web application with the following goals
 - You can use any language but we do prefer it being in ruby or javascript. If it is not in these languages, please note, we will need instructions to get it running starting from what dependencies are needed :)
 - Any notes or thoughts while building it are appreciated. 
 
-* Untube [11/14]
+* Untube [11/15]
 
-** TODO deploy
+** TODO Users
+** TODO Deploy
+*** TODO setup versioning from git tag
+*** TODO setup rake task to bump version
+*** TODO setup capistrano
+*** references
+- http://capistranorb.com/documentation/getting-started/preparing-your-application/
+- http://blog.danielpietzsch.com/post/1209091430/show-the-version-number-of-your-rails-app-using
+- review gems
+  - https://github.com/toland/app_version
+  - https://github.com/nilbus/rails-app-versioning
 ** TODO setup database_cleaner
-** TODO i18n
-- add top level =:locale= route
+*** references
+- https://github.com/DatabaseCleaner/database_cleaner
+** TODO I18n
+*** TODO use translations in views
+*** TODO setup translation files
+*** TODO Routes
 
 #+BEGIN_SRC ruby
-  # config/routes.rb
-  scope "/:locale" do
-    resources :books
+  scope "(/:locale)", locale: /en/ do
+    resources :videos
   end
+
+  get '/:locale' => 'videos#index'
 #+END_SRC
+
+#+BEGIN_QUOTE
+Do take special care about the order of your routes, so this route
+declaration does not "eat" other ones. (You may want to add it
+directly before the root :to declaration.)
+#+END_QUOTE
 *** references
 - http://guides.rubyonrails.org/i18n.html
+- http://guides.rubyonrails.org/routing.html
 ** DONE Main page
 - change to videos#index
 - setup top-level headline
