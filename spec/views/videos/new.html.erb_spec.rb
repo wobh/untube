@@ -1,25 +1,17 @@
 require 'rails_helper'
+require Rails.root.join('spec/support/factory_girl_support.rb')
 
 RSpec.describe "videos/new", type: :view do
-  before(:each) do
-    assign(:video, Video.new(
-      :data => "",
-      :filename => "",
-      :extension => "MyText",
-      :mime_type => "MyText",
-      :title => "MyText",
-      :description => "MyText"
-    ))
-  end
+  before(:each) { assign(:video, build(:video)) }
 
   it "renders new video form" do
     render
 
     assert_select "form[action=?][method=?]", videos_path, "post" do
 
-      assert_select "filefield#video_data[name=?]", "video[id]"
+      assert_select "input#video_data[type=file][name=?]", "video[data]"
 
-      assert_select "textfield#video_title[name=?]", "video[title]"
+      assert_select "input#video_title[type=text][name=?]", "video[title]"
 
       assert_select "textarea#video_description[name=?]", "video[description]"
     end
