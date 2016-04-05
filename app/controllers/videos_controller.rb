@@ -15,8 +15,8 @@ class VideosController < ApplicationController
       format.html { @video }
       format.json { render :show, status: :created, location: @video }
       format.mp4  { send_data @video.data,
-                    filename: @video.filename + @video.extension,
-                    type: @video.mime,
+                    filename: @video.filename,
+                    type: @video.mime_type,
                     disposition: 'inline' }
     end
   end
@@ -78,12 +78,12 @@ class VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:data, :title, :description) { |approved|
-        
-      }
+      params.require(:video).permit(:data, :title, :description)
     end
 
-    # Extract attributes from parameters
+    # Extract attributes from parameters TODO MAYBE: params.permit
+    # takes a block yeilding the accepted params, this method could
+    # get folded into that.
     def video_attrs
       data = video_params.fetch(:data)
       extension = File.extname(data.original_filename)
@@ -91,7 +91,7 @@ class VideosController < ApplicationController
         { data: data.read,
           mime_type: data.content_type,
           extension: extension,
-          filename: File.basename(data.original_filename, extension)
+          base_name: File.basename(data.original_filename, extension)
         })
     end
 end

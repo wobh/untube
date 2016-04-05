@@ -11,7 +11,7 @@ FactoryGirl.define do
     data "\x00\xDE\xAD\xBE\xEF\x01" # TODO replace with minimal valid mp4
     mime_type "video/mp4"
     extension ".mp4"
-    filename "foo"
+    base_name "foo"
     title "Foo"
     description "Bar baz qux."
   end
