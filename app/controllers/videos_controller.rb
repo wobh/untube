@@ -33,7 +33,7 @@ class VideosController < ApplicationController
   # POST /videos
   # POST /videos.json
   def create
-    @video = Video.new(video_attrs)
+    @video = Video.new(create_video_params)
 
     respond_to do |format|
       if @video.save
@@ -50,7 +50,7 @@ class VideosController < ApplicationController
   # PATCH/PUT /videos/1.json
   def update
     respond_to do |format|
-      if @video.update(video_attrs)
+      if @video.update(update_video_params)
         format.html { redirect_to @video, notice: 'Video was successfully updated.' }
         format.json { render :show, status: :ok, location: @video }
       else
@@ -77,21 +77,28 @@ class VideosController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def video_params
-      params.require(:video).permit(:data, :title, :description)
+
+    def create_video_params
+      params.require(:video).permit(:title, :description).tap { |p|
+        data = params.require(:video).require(:data)
+        extension = File.extname(data.original_filename)
+        p.merge!({ data: data.read,
+                      mime_type: data.content_type,
+                      extension: extension,
+                      base_name: File.basename(data.original_filename, extension)
+                    }) }
     end
 
-    # Extract attributes from parameters TODO MAYBE: params.permit
-    # takes a block yeilding the accepted params, this method could
-    # get folded into that.
-    def video_attrs
-      data = video_params.fetch(:data)
-      extension = File.extname(data.original_filename)
-      video_params.slice(:title, :description).merge(
-        { data: data.read,
-          mime_type: data.content_type,
-          extension: extension,
-          base_name: File.basename(data.original_filename, extension)
-        })
+    def update_video_params
+      params.require(:video).permit(:data, :title, :description).tap { |p|
+        if data = p[:data]
+          extension = File.extname(data.original_filename)
+          p.merge!({ data: data.read,
+                     mime_type: data.content_type,
+                     extension: extension,
+                     base_name: File.basename(data.original_filename, extension)
+                   })
+        end }
     end
+    # It seems likely to me that update and create could diverge further.
 end

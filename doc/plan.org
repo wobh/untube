@@ -16,7 +16,7 @@ The goal of this project is to create a web application with the following goals
 - You can use any language but we do prefer it being in ruby or javascript. If it is not in these languages, please note, we will need instructions to get it running starting from what dependencies are needed :)
 - Any notes or thoughts while building it are appreciated. 
 
-* Untube [11/15]
+* Untube [12/18]
 
 ** TODO Users
 ** TODO Deploy
@@ -53,6 +53,43 @@ directly before the root :to declaration.)
 *** references
 - http://guides.rubyonrails.org/i18n.html
 - http://guides.rubyonrails.org/routing.html
+** TODO setup integration tests
+** TODO setup performance/load tests
+** DONE Fix edit error
+
+*** reproduction
+
+1. edit existing video, changing only the title or description
+2. submit
+
+- expect :: update successful
+- actual :: error, missing data parameter
+
+*** root cause
+
+- =VideosController#video_attrs=
+  - calls =video_params.fetch(:data)=; no default
+- videos controller spec generated all parameters for testing update
+  - tests wouldn't fail since they had all attributes
+
+*** solution
+
+It makes sense that =data= should be required for new videos, but not
+for editing them.
+
+- change controller spec to use only one parameter for editing
+- use two controller methods =create_video_params=,
+  =update_video_params=
+- integrate necessary parts of =video_attrs=
+
+*** notes
+
+- to change the =params= data yielded to a block you have to use
+  =tap=.
+
+*** references
+http://guides.rubyonrails.org/action_controller_overview.html#parameters
+- http://blog.trackets.com/2013/08/17/strong-parameters-by-example.html
 ** DONE Main page
 - change to videos#index
 - setup top-level headline

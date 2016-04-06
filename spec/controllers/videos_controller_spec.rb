@@ -105,7 +105,7 @@ RSpec.describe VideosController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) { attributes_for(:video_parameters, title: "Bar") }
+      let(:new_attributes) { { title: "Bar" } }
 
       it "updates the requested video" do
         video = create(:video, valid_attributes)
